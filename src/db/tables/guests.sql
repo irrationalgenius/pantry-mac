@@ -67,26 +67,3 @@ COMMENT ON COLUMN pantry.guests.allergies IS 'List of all the Guests Allergies';
 
 COMMENT ON CONSTRAINT pk_guests ON pantry.guests IS 'Primary Key for the Guests table: id';
 COMMENT ON CONSTRAINT status_chk ON pantry.guests IS 'Validates correct status default values';
-
--- Table Triggers
-
--- DROP TRIGGER enforce_guests_status_wait_trgr ON guests;
-
-create
-    trigger enforce_guests_status_wait_trgr before insert
-        or update
-            on
-            pantry.guests for each row execute procedure pantry.enforce_guests_status_waiting();;
--- DROP TRIGGER last_date_upd_guest_trgr ON guests;
-
-create
-    trigger last_date_upd_guest_trgr before update
-        on
-        pantry.guests for each row execute procedure pantry.update_last_date_current();;
--- DROP TRIGGER enforce_guests_gender_trgr ON guests;
-
-create
-    trigger enforce_guests_gender_trgr before insert
-        or update
-            on
-            pantry.guests for each row execute procedure pantry.enforce_guests_gender();;
